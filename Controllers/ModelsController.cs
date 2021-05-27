@@ -8,19 +8,19 @@ namespace Autodesk.Forge.Samples.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class DataController : ControllerBase
+    public class ModelsController : ControllerBase
     {
-        private readonly ILogger<DataController> _logger;
+        private readonly ILogger<ModelsController> _logger;
         private readonly IForgeService _forgeService;
 
-        public DataController(ILogger<DataController> logger, IForgeService forgeService)
+        public ModelsController(ILogger<ModelsController> logger, IForgeService forgeService)
         {
             _logger = logger;
             _forgeService = forgeService;
         }
 
-        [HttpGet("objects")]
-        public async Task<IEnumerable<Autodesk.Forge.Samples.Models.Object>> GetObjects()
+        [HttpGet()]
+        public async Task<IEnumerable<Autodesk.Forge.Samples.Models.Object>> GetModels()
         {
             var objects = await _forgeService.GetObjects();
             return objects;
