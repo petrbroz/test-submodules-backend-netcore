@@ -29,6 +29,8 @@ that is split across multiple GitHub repositories, namely:
     |--------------------|--------------------------|
     |`export FORGE_CLIENT_ID=your-client-id`<br>`export FORGE_CLIENT_SECRET=your-client-secret`|`set FORGE_CLIENT_ID=your-client-id`<br>`set FORGE_CLIENT_SECRET=your-client-secret`|
 
+    > Replace `your-client-id` and `your-client-secret` with your Forge app credentials.
+
 - Run the server: `dotnet run`
 
 ### Visual Studio Code
@@ -39,14 +41,23 @@ Now, you can run and debug your application from the editor using _Run_ > _Start
 
 ### Heroku Deployment
 
-Heroku does not support .NET Core out-of-the-box but you can easily deploy your application using Docker.
-If you have the [Heroku CLI tool](https://devcenter.heroku.com/articles/heroku-cli) installed, try the following:
+Heroku does [support git submodules](https://devcenter.heroku.com/articles/git-submodules)
+when using the standard `git push heroku <branch>` deployment, meaning that if you have
+the [Heroku CLI tool](https://devcenter.heroku.com/articles/heroku-cli) installed, you can simply do:
 
 ```bash
 heroku login
+heroku create your-heroku-app --buildpack https://github.com/jincod/dotnetcore-buildpack.git
+heroku git:remote -a your-heroku-app
 heroku config:set -a your-heroku-app FORGE_CLIENT_ID=your-client-id
 heroku config:set -a your-heroku-app FORGE_CLIENT_SECRET=your-client-secret
-heroku container:login
-heroku container:push -a your-heroku-app web
-heroku container:release -a your-heroku-app web
+git push heroku master
 ```
+
+> Replace `your-client-id` and `your-client-secret` with your Forge app credentials,
+> and `your-heroku-app` with your own Heroku app name.
+
+Note that linking your Heroku app directly to a GitHub repo will not work, as Heroku
+cannot resolve git submodules in that case. To work around that limitation, you can
+remove the git submodule and start versioning its files as part of this repo, as explained
+[here](https://stackoverflow.com/questions/26752481/remove-git-submodule-but-keep-files).
