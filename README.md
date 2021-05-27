@@ -32,3 +32,17 @@ that is split across multiple GitHub repositories.
 If you're using [Visual Studio Code](https://code.visualstudio.com), make a copy the _.env\_template_ file
 in the root folder, name it _.env_, and add your Forge client ID and client secret to it.
 Now, you can run and debug your application from the editor using _Run_ > _Start Debugging_ or by pressing `f5`.
+
+### Heroku Deployment
+
+Heroku does not support .NET Core out-of-the-box but you can easily deploy your application using Docker.
+If you have the [Heroku CLI tool](https://devcenter.heroku.com/articles/heroku-cli) installed, try the following:
+
+```bash
+heroku login
+heroku config:set -a your-heroku-app FORGE_CLIENT_ID=your-client-id
+heroku config:set -a your-heroku-app FORGE_CLIENT_SECRET=your-client-secret
+heroku container:login
+heroku container:push -a your-heroku-app web
+heroku container:release -a your-heroku-app web
+```
