@@ -1,7 +1,11 @@
 # test-submodules-backend-netcore
 
 This is the ASP.NET Core backend part of an experimental Autodesk Forge sample app
-that is split across multiple GitHub repositories.
+that is split across multiple GitHub repositories, namely:
+
+- Frontend (HTML, CSS, JavaScript): https://github.com/petrbroz/test-submodules-frontend
+- Node.js backend: https://github.com/petrbroz/test-submodules-backend-nodejs
+- .NET Core backend: https://github.com/petrbroz/test-submodules-backend-netcore
 
 ## Prerequisites
 
@@ -11,13 +15,13 @@ that is split across multiple GitHub repositories.
 
 ## Getting started
 
-- Clone this repository _with submodules_:
+- Clone this repository **with submodules**:
     ```
     git clone --recurse-submodules https://github.com/petrbroz/test-submodules-backend-netcore
     cd test-submodules-backend-netcore
     ```
 
-- Install dependencies: `dotnet restore`
+- Install .NET Core dependencies: `dotnet restore`
 
 - Provide your Forge app client ID and secret via environment variables:
 
